@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const ejs = require("ejs");
 require("dotenv").config();
-const fetch = require("node-fetch");
+// const fetch = require("node-fetch");
 
 const { setupSocket } = require("./config/socket");
 const app = express();
