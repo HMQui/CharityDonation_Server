@@ -11,8 +11,6 @@ const app = express();
 const server = http.createServer(app);
 
 setupSocket(server);
-const allowedOrigins = [process.env.CLIENT_URL];
-
 // Ejs config
 app.set("view engine", "ejs");
 app.set("views", "./views");
@@ -21,9 +19,16 @@ app.set("views", "./views");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+const allowedOrigins = ["https://www.gofund.io.vn", "https://gofund.io.vn"];
 app.use(
     cors({
-        origin: process.env.CLIENT_URL,
+        origin: function (origin, callback) {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error("Not allowed by CORS"));
+            }
+        },
         credentials: true
     })
 );
