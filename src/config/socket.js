@@ -8,7 +8,7 @@ let io;
 const setupSocket = (server) => {
     io = new Server(server, {
         cors: {
-            origin: ["http://localhost:3000", "https://gofund.io.vn", "https://www.gofund.io.vn"],
+            origin: ["https://gofund.io.vn", "https://www.gofund.io.vn"],
             credentials: true,
             methods: ["GET", "POST", "PATCH", "DELETE"],
             allowedHeaders: ["Content-Type", "Authorization"]
