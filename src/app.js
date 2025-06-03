@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const ejs = require("ejs");
 require("dotenv").config();
+const fetch = require("node-fetch");
 
 const { setupSocket } = require("./config/socket");
 const app = express();
@@ -63,6 +64,22 @@ app.use("/api/withdraw", withdrawRouter);
 const tipsRoute = require("./routes/tips.route");
 app.use("/api", tipsRoute);
 
+// Ping for living server
+app.get("/api/ping", (req, res) => {
+    res.status(200).send("pong");
+});
+
 server.listen(process.env.PORT, () => {
     console.log(`Server is running at PORT ${process.env.PORT}`);
+
+    const selfUrl = `${process.env.SERVER_URL || "https://api.gofund.io.vn"}/api/ping`;
+
+    setInterval(
+        () => {
+            fetch(selfUrl)
+                .then((res) => console.log(`[Self-Ping] Status: ${res.status}`))
+                .catch((err) => console.error(`[Self-Ping] Error:`, err.message));
+        },
+        10 * 60 * 1000
+    );
 });
