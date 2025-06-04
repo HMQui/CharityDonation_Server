@@ -79,10 +79,9 @@ app.get("/ping", (req, res) => res.status(200).json({ message: "Server is still 
 const PORT = process.env.PORT || 10000;
 
 server.listen(PORT, () => {
-    console.log(`Server is running at PORT ${PORT}.`);
+    console.log(`Server is running at PORT ${PORT}. ENV PORT: ${process.env.PORT}`);
 
     const selfUrl = `${process.env.SERVER_URL}/api/ping`;
-
     setInterval(
         () => {
             fetch(selfUrl)
