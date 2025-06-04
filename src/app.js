@@ -82,7 +82,7 @@ server.listen(process.env.PORT, () => {
     setInterval(
         () => {
             fetch(selfUrl)
-                .then((res) => console.log(`[Self-Ping] Status: ${res.status}`))
+                .then((res) => console.log(`[Self-Ping] Status: ${res.status} - it was 10 mins`))
                 .catch((err) => console.error(`[Self-Ping] Error:`, err.message));
         },
         10 * 60 * 1000
