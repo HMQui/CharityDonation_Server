@@ -5,7 +5,7 @@ const environment = () => {
     const clientId = process.env.PAYPAL_CLIENT_ID;
     const clientSecret = process.env.PAYPAL_SECRET;
 
-    return new checkoutNodeJssdk.core.LiveEnvironment(clientId, clientSecret);
+    return new checkoutNodeJssdk.core.SandboxEnvironment(clientId, clientSecret);
 };
 
 const client = () => {
